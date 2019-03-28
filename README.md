@@ -4,10 +4,9 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|name|integer|null: false|
+|name|string|null: false|
 |email|integer|null: false, add_index :users, :email, unique: true|
 |password|integer|null: false|
-|group_id|references|null: false, foreign_key: true|
 |created_at|timestamps||
 |updated_at|timestamps||
 
@@ -20,8 +19,7 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|group_name|integer|null: false|
-|user_id|references|null: false, foreign_key: true|
+|name|string|null: false|
 |created_at|timestamps||
 |updated_at|timestamps||
 
