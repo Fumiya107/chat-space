@@ -1,0 +1,40 @@
+.wrapper
+  .chat-side
+    .side-header
+      %p.side-header__user-name 名前
+      %ul.side-header__user-menu
+        %li.side-header__user-menu_edit-user
+          %a{ href: '/groups/new'}
+            .fa.fa-edit
+        %li.side-header__user-menu_new-group
+          %a{ href: '/users/0/edit'}
+            .fa.fa-cog
+    .groups
+      %a{ href: '#'}
+        .groups__group
+          %p.groups__group_name aaa
+          %p.groups__group_latest-message まだメッセージがありません。
+  .chat-main
+    .main-header
+      .main-header__current-group{"data-group_id" => "o"}
+        %h2.main-header__current-group_name タイトル
+        %ul.main-header__current-group_member-list
+          Member :
+          %li.main-header__current-group_member-list_name
+            aaa
+      %a.main-header__edit-btn{ href: 'groups/0/edit'}
+        Edit
+    .messages
+      .messages-message{"data-message_id" => "o"}
+        .messages-message__info
+          %p.messages-message__info_name IWAMA
+          %p.messages-message__info_date 2019/04/08(Mon) 10:00:00
+        %p.messages-message__text YES
+    .form
+      %form#new_message.form-box{"accept-charset" => "UTF-8", action: "/groups/133/messages", enctype: "multipart/form-data", method: "post"}
+        .form-box__input-box
+          %input#message_content.form-box__input-box_text{name: "message[content]", placeholder: "type a message", type: "text"}/
+          %label.form-box__input-box_label{for: "message_image"}
+            %i.fa.fa-image
+            %input#message_image.image-label__input{name: "message[image]", type: "file"}/
+        %input.form-box__submit-btn{"data-disable-with" => "Send", name: "commit", type: "submit", value: "Send"}/
