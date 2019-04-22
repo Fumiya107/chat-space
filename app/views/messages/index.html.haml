@@ -1,20 +1,5 @@
 .wrapper
-  .chat-side
-    .side-header
-      %p.side-header__user-name
-        = current_user.name
-      %ul.side-header__user-menu
-        %li.side-header__user-menu_edit-user
-          = link_to do
-            = fa_icon 'pencil-square-o', class: 'icon'
-        %li.side-header__user-menu_new-group
-          = link_to edit_user_path(current_user) do
-            = fa_icon 'cog', class: 'icon'
-    .groups
-      %a{ href: '#'}
-        .groups__group
-          %p.groups__group_name aaa
-          %p.groups__group_latest-message まだメッセージがありません。
+  = render 'shared/chat-side'
   .chat-main
     .main-header
       .main-header__current-group{"data-group_id" => "o"}
@@ -32,10 +17,10 @@
           %p.messages-message__info_date 2019/04/08(Mon) 10:00:00
         %p.messages-message__text YES
     .form
-      %form#new_message.form-box{"accept-charset" => "UTF-8", action: "/groups/133/messages", enctype: "multipart/form-data", method: "post"}
-        .form-box__input-box
-          %input#message_content.form-box__input-box_text{name: "message[content]", placeholder: "type a message", type: "text"}/
-          %label.form-box__input-box_label{for: "message_image"}
-            %i.fa.fa-image
-            %input#message_image.image-label__input{name: "message[image]", type: "file"}/
-        %input.form-box__submit-btn{"data-disable-with" => "Send", name: "commit", type: "submit", value: "Send"}/
+      = form_for [@group, @message] do |f|
+        = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+        .form__mask
+          = f.label :image, class: 'form__mask__image' do
+            = fa_icon 'picture-o', class: 'icon'
+            = f.file_field :image, class: 'hidden'
+        = f.submit 'Send', class: 'form__submit'
