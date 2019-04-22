@@ -1,47 +1,46 @@
-.chat-side {
-    width: 300px;
+.side-bar {
+    box-sizing: border-box;
     color: white;
-    float: left;
-}
-
-.side-header {
-      background-color: #253141;
+    width: 300px;
+    .header {
+      background-color: $side_blue_dark;
       height: 100px;
-      display: flex;
-      align-items: center;
+      line-height: 100px;
       padding: 0 20px;
-      justify-content: space-between;
-      width: 100%;
-      font-weight: bold;
-      &__user-name {
-      display: block;
-      margin-block-start: 1em;
-      margin-block-end: 1em;
-      margin-inline-start: 0px;
-      margin-inline-end: 0px;
+      &__name {
+        display: inline-block;
+        font-size: $side_header_font;
+        font-weight: bold;
       }
-      &__user-menu {
-      display: flex;
-        &_edit-user {
+      &__lists {
+        display: inline-block;
+        float: right;
+        .list {
+          display: inline-block;
         }
-        &_new-group {
+        .icon {
+          color: $white;
+          font-size: $side_header_font;
         }
-      }
-}
-
-.groups {
-    height: calc(100vh - 100px);
-    background-color: #2f3e51;
-    padding: 20px 20px 0;
-    overflow: scroll;
-    &__group{
-    margin-bottom: 40px;
-      &_name {
-      font-size: 15px;
-      margin-bottom: 5px;
-      }
-      &_latest-message {
-      font-size: 11px;
       }
     }
-}
+  
+    .groups {
+      background-color: $side_blue_light;
+      height: calc(100vh - 100px);
+      padding: 0 20px;
+      .group {
+        box-sizing: border-box;
+        padding: 20px 0 40px;
+        &__name {
+          color: $white;
+          font-size: $side_group_name;
+        }
+        &__message {
+          color: $white;
+          font-size: $side_group_message;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
