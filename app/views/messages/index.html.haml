@@ -1,26 +1,20 @@
 .wrapper
-  = render 'shared/chat-side'
-  .chat-main
-    .main-header
-      .main-header__current-group{"data-group_id" => "o"}
-        %h2.main-header__current-group_name タイトル
-        %ul.main-header__current-group_member-list
-          Member :
-          %li.main-header__current-group_member-list_name
-            aaa
-      %a.main-header__edit-btn{ href: 'groups/0/edit'}
-        Edit
+  = render partial: 'messages/side_bar'
+
+  .right-contents
+    .header
+      .left-header
+        .left-header__title
+          = @group.name
+          %ul.left-header__members
+            %li.member Members：
+            %li.member
+              - @group.users.each do |user|
+                = user.name
+      .right-header
+        = link_to edit_group_path(@group), class: "right-header__button" do
+          Edit
     .messages
-      .messages-message{"data-message_id" => "o"}
-        .messages-message__info
-          %p.messages-message__info_name IWAMA
-          %p.messages-message__info_date 2019/04/08(Mon) 10:00:00
-        %p.messages-message__text YES
-    .form
-      = form_for [@group, @message] do |f|
-        = f.text_field :content, class: 'form__message', placeholder: 'type a message'
-        .form__mask
-          = f.label :image, class: 'form__mask__image' do
-            = fa_icon 'picture-o', class: 'icon'
-            = f.file_field :image, class: 'hidden'
-        = f.submit 'Send', class: 'form__submit'
+      = render @messages
+    = render partial: 'messages/bottom__content'
+

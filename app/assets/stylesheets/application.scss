@@ -1,35 +1,9 @@
 @import "./reset";
+@import "./variable";
+@import "./flash";
+@import "./wrapper";
 @import "font-awesome";
-@import "./chat-side";
-@import "./chat-main";
-@import "modules/user";
-@import "config/colors";
-@import "modules/flash";
-@import "modules/group";
-// @import "modules/chat"
-
-/*
- *= require font-awesome
- */
-
-$primary-color: #fafafa;
-
-* {
-    box-sizing: border-box;
-}
-
-li {
-   display: list-item;
-   text-align: -webkit-match-parent;
-   padding-left: 5px
-}
-
-a {
-  text-decoration: none;
-  color: $primary-color;
-  cursor: pointer;
-}
-
-
-
-
+@import "./leftside";
+@import "./right-contents";
+@import "./user";
+@import "./group";
