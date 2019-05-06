@@ -24,7 +24,6 @@ function buildHTML(message){
     $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight});
 }
 
-$(function(){
     $('.new_message').on('submit', function(e){
         e.preventDefault();
         var formData = new FormData(this);
@@ -51,7 +50,32 @@ $(function(){
         })
         .fail(function(){
             $('.form__submit').prop('disabled', false);
-            alert('error');        })
+            alert('error');
+        })
     })
-})
-})
+        var reloadMessages = function() {
+            //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+            last_message_id = $(".message").last().data('message-id');
+            var href = 'api/messages'
+            $.ajax({
+            //ルーティングで設定した通りのURLを指定
+            url: href,
+            //ルーティングで設定した通りhttpメソッドをgetに指定
+            type: 'get',
+            dataType: 'json',
+            //dataオプションでリクエストに値を含める
+            data: {id: last_message_id}
+            })
+            .done(function(messages) {
+                var insertHTML = '';
+                messages.forEach(function(message) {
+                    $('.messages').append(buildHTML(message));
+                    scroll();
+                  })
+            })
+            .fail(function() {
+            alert('自動更新に失敗しました');
+            });
+        };
+        setInterval(reloadMessages, 5000);
+});
